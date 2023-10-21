@@ -4,6 +4,9 @@ pipeline{
         jdk 'jdk17'
         terraform 'terraform'
     }
+    environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
     stages{
         stage('clean Workspace'){
             steps{
@@ -12,7 +15,7 @@ pipeline{
         }
         stage('checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/Aj7Ay/TERRAFORM-JENKINS-CICD.git'
+                git branch: 'main', url: 'https://github.com/sudhamshapp/TERRAFORM-JENKINS-CICD.git'
             }
         }
         stage('Terraform version'){
@@ -31,7 +34,7 @@ pipeline{
         stage("quality gate"){
            steps {
                 script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube-credentials' 
                 }
             } 
         }

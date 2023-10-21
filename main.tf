@@ -5,7 +5,7 @@ resource "aws_instance" "Ajay" {
   vpc_security_group_ids = [aws_security_group.ec2_security_group.id]
   user_data              = base64encode(file("website.sh"))
   tags = {
-    Name = "Aj-EC2"
+    Name = "mars"
   }
 }
 
@@ -21,14 +21,12 @@ resource "aws_security_group" "ec2_security_group" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-
   ingress {
     from_port   = 0
     to_port     = 0    # Allow all ports
     protocol    = "-1" # All protocols
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   ingress {
     description      = "https"
     from_port        = 443
@@ -56,6 +54,6 @@ resource "aws_security_group" "ec2_security_group" {
   }
 
   tags = {
-    Name = "Aj_sg"
+    Name = "sudhamsh-sg"
   }
 }
